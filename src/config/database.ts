@@ -32,8 +32,12 @@ const createTableIfNotExists = async () => {
   try {
     await dbClient.query(query);
     console.log("Table 'clients' created successfully.");
-  } catch (error) {
-    console.error("Error creating the table 'clients':", error);
+  } catch (error: any) {
+    if (error.code === "42P07") {
+      console.log("Table 'clients' already exists.");
+    } else {
+      console.error("Error creating the table 'clients':", error);
+    }
   }
 };
 
