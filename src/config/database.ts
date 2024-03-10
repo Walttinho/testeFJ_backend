@@ -1,8 +1,6 @@
-import dotenv from "dotenv";
-dotenv.config({ path: "../../.env" });
-import { Pool } from "pg";
+import { Client } from "pg";
 
-const pool = new Pool({
+const dbClient = new Client({
   host: process.env.PGHOST || "localhost",
   port: Number(process.env.PGPORT) || 5432,
   database: process.env.PGDATABASE || "testefj",
@@ -10,10 +8,36 @@ const pool = new Pool({
   password: process.env.PGPASSWORD || "postgres",
 });
 
-pool.connect((err, client, release) => {
-  if (err) {
-    return console.error("Error acquiring client", err.stack);
+const connection = async () => {
+  try {
+    await dbClient.connect();
+    console.log(`Connected to the database ${dbClient.database}`);
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
   }
-  console.log("Connected to PostgreSQL");
-  release();
-});
+};
+
+const createTableIfNotExists = async () => {
+  const query = `
+   CREATE TABLE clients (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(255) NOT NULL,
+    x INTEGER,
+    y INTEGER
+);
+ `;
+
+  try {
+    await dbClient.query(query);
+    console.log("Table 'clients' created successfully.");
+  } catch (error) {
+    console.error("Error creating the table 'clients':", error);
+  }
+};
+
+connection();
+createTableIfNotExists();
+
+export default dbClient;
