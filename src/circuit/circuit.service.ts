@@ -4,15 +4,13 @@ export class CircuitService {
   async calculateShortestCircuit(): Promise<number> {
     const query = "SELECT id, x, y FROM clients";
     const { rows }: { rows: { id: number; x: number; y: number }[] } =
-      await dbClient.query(query);
-    console.log(rows);
+      await dbClient.query(query);   
 
     const clients: { id: number; x: number; y: number }[] = rows.map((row) => ({
       id: row.id,
       x: row.x,
       y: row.y,
-    }));
-    console.log(clients);
+    }));    
 
     const calculateDistance = (
       p1: { x: number; y: number },
