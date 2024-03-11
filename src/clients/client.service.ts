@@ -22,23 +22,23 @@ export class ClientService {
     const parameters: any[] = [];
 
     if (filter.name) {
-      query += " AND name = $1";
+      query += " AND name = $" + (parameters.length + 1);
       parameters.push(filter.name);
     }
     if (filter.email) {
-      query += " AND email = $2";
+      query += " AND email = $" + (parameters.length + 1);
       parameters.push(filter.email);
     }
     if (filter.phone) {
-      query += " AND phone = $3";
+      query += " AND phone = $" + (parameters.length + 1);
       parameters.push(filter.phone);
     }
     if (filter.x) {
-      query += " AND x = $4";
+      query += " AND x = $" + (parameters.length + 1);
       parameters.push(filter.x);
     }
     if (filter.y) {
-      query += " AND y = $5";
+      query += " AND y = $" + (parameters.length + 1);
       parameters.push(filter.y);
     }
 
