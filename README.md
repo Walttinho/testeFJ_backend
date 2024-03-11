@@ -1,42 +1,106 @@
-# Teste de Programação Desenvolvedor Facilita Jurídico
+# Sistema de Gerenciamento de Clientes para Serviços de Limpeza
 
-Este teste tem como objetivo avaliar suas habilidades em programação. Certifique-se de entender os requisitos antes de começar a codificar. Utilize o ambiente de desenvolvimento que se sentir mais confortável. Comente o código conforme necessário para explicar sua lógica. Não hesite em pedir esclarecimentos caso algo não esteja claro.
-Após finalizar, grave um vídeo, de até 5 minutos, explicando o que foi desenvolvido.
+## Visão Geral
 
-## Requisito
+Este projeto é uma solução robusta e eficiente para o gerenciamento de clientes de uma empresa de serviços de limpeza. Desenvolvido com foco na centralização e otimização do processo de gestão de clientes, substituindo métodos manuais por uma plataforma digital.
 
-### Sistema de Gerenciamento de Clientes
+## Características Principais
 
-#### Parte 1
+- **Gestão de Clientes**: Permite listar, filtrar e adicionar clientes de forma eficiente.
+- **Otimização de Rotas de Serviço**: Utiliza algoritmos avançados para otimizar as rotas de serviço, maximizando a eficiência e reduzindo custos.
+- **Interface de Usuário Intuitiva**: Projetada para facilitar o uso por operadores e gestores.
 
-Uma empresa que realiza limpeza em residências enfrenta desafios no gerenciamento de seus clientes e busca uma solução eficiente para cadastrar e visualizar as informações que hoje são controladas em planilhas. Para centralizar as informações e ajudar na expansão da empresa, ela deseja uma plataforma onde seja possível gerenciar os seus clientes. O sistema deve ser composto por um backend em Node.js utilizando PostgreSQL como banco de dados, e um frontend em React.
+## Tecnologias Utilizadas
 
-A empresa utiliza as seguintes informações para gerenciar seus clientes: nome, email e telefone.
+- **Linguagem de Programação**: TypeScript
+- **Framework**: Node.js com Express
+- **Banco de Dados**: PostgreSQL
+- **Ferramentas Adicionais**: dotenv para gerenciamento de variáveis de ambiente, cors para habilitação de CORS, e pg para integração com o cliente PostgreSQL.
 
-Na plataforma criada deve ser possível:
-- Listar os seus clientes e filtrar com base nas informações cadastradas
-- Cadastrar clientes novos
+## Estrutura do Projeto
 
-#### Parte 2
+O projeto está estruturado da seguinte forma para garantir uma organização clara e eficiente:
 
-Suponha que, além de cadastrar e visualizar clientes, a empresa deseja otimizar as rotas de atendimento para maximizar a eficiência na visitação dos clientes. Considere um mapa bidimensional representando a localização dos clientes, onde cada ponto cartesiano possui um cliente. Cada cliente cadastrado possui uma coordenada X e uma coordenada Y nesse mapa.
+- **src/**: Contém o código-fonte principal, dividido em módulos para circuitos e clientes, facilitando a manutenção e a expansão do sistema.
+- **config/**: Inclui arquivos de configuração, como a configuração do banco de dados.
+- **dto/**: Diretório para Objetos de Transferência de Dados (DTOs), utilizados para a validação e transferência de dados entre camadas do sistema.
+- **entities/**: Define as entidades do banco de dados, refletindo a estrutura das tabelas no PostgreSQL.
 
-O objetivo é calcular a rota partindo da empresa (0,0) e que passe pela localização de todos os clientes cadastrados no banco de dados e retorne à empresa no final. A rota deve ser calculada para ter a menor distância possível.
+## Instalação
 
-O algoritmo para calcular essa rota deve estar disponibilizado via rota da api para ser chamado pelo front quando necessário.
+### Pré-requisitos
 
-Implemente um botão na tela de clientes que, ao ser clicado, abre uma modal e mostra a ordem de visitação dos clientes na rota calculada. A visualização pode ser a mais simples possível mostrando uma lista dos clientes na ordem que devem ser visitados do primeiro ao último cliente da rota.
+Antes de começar, certifique-se de ter instalado em seu sistema:
 
-Ao desenvolver essa segunda parte, altere a rota de cadastro e visualização para que seja possível cadastrar e visualizar as coordenadas X e Y dos clientes da empresa.
+- [Node.js](https://nodejs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 
-### Observações gerais
+### Passos de Instalação
 
-- Suba o código e o vídeo em um repositório público no github e envie o link para o seguinte e-mail: julia.ramirez@facilitajuridico.com. Deixe claro no readme do seu projeto como rodar o projeto localmente e qual a versão das ferramentas utilizadas.
-- O prazo para realização do teste será de 3 dias, a partir da sua candidatura para a vaga.
-- Junto com o código fonte forneça o DDL da tabela do banco de dados. Dê preferência para consultas em SQL na api e evite a utilização de ORMs.
+1. **Clone o repositório**
+```bash
+git clone https://github.com/seu-usuario/seu-projeto.git
+cd seu-projeto
+```
 
-### Conclusão
+2. **Instale as dependências**
+```bash
+npm install
+```
 
-O teste acima foi desenvolvido para avaliar os seus conhecimentos básicos e sua lógica para resolução de problemas. Caso ache necessário, documente suas escolhas e abordagens para o desenvolvimento da solução.
+3. **Configure o ambiente**
 
-Lembrando que, caso fique com dúvida em algum ponto, envie suas perguntas para que todos os pontos fiquem claros antes da entrega da solução.
+   Crie um arquivo `.env` na raiz do projeto e preencha com as variáveis de ambiente necessárias. Você pode usar o arquivo `.env.Example` como modelo.
+```bash
+cp .env.Example .env
+```
+
+   Edite o arquivo `.env` e preencha com as informações do seu ambiente, como credenciais do banco de dados.
+
+4. **Configure o banco de dados**
+
+   Importe o arquivo `Dump.sql` para o seu banco de dados PostgreSQL para criar as tabelas necessárias.
+```bash
+psql -U seu_usuario -d seu_banco_de_dados < Dump.sql
+```
+
+5. **Inicie o servidor**
+```bash
+npm start
+```
+
+   O servidor estará rodando em `http://localhost:3000`.
+
+### Testes
+
+Para executar os testes, use o comando:
+```bash
+npm test
+```
+
+### Desenvolvimento
+
+Para desenvolver e testar novas funcionalidades, você pode usar o comando:
+```bash
+npm run dev
+```
+
+Este comando iniciará o servidor em modo de desenvolvimento, com hot-reload habilitado.
+
+## Contribuição
+
+Contribuições são bem-vindas! Para contribuir, siga os passos abaixo:
+
+1. Faça um fork do repositório.
+2. Crie uma branch com a sua feature (`git checkout -b feature/NomeDaFeature`).
+3. Faça commit das suas alterações (`git commit -am 'Adiciona alguma funcionalidade'`).
+4. Faça push para a sua branch (`git push origin feature/NomeDaFeature`).
+5. Abra um Pull Request.
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Contato
+
+Para dúvidas ou sugestões, por favor, abra uma issue ou entre em contato com os mantenedores do projeto.
